@@ -1,5 +1,51 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+// Mendapatkan nama hari dalam bahasa Indonesia dari tanggal
+function getNamaHari($tanggal)
+{
+    $nama_hari = array(
+        'Minggu',
+        'Senin',
+        'Selasa',
+        'Rabu',
+        'Kamis',
+        'Jumat',
+        'Sabtu'
+    );
+    $nama_hari_indonesia = $nama_hari[date('w', strtotime($tanggal))];
+    return $nama_hari_indonesia;
+}
+
+// Mendapatkan tanggal dalam format yang diinginkan
+function getTanggal($tanggal)
+{
+    $bulan = array(
+        'January' => 'Januari',
+        'February' => 'Februari',
+        'March' => 'Maret',
+        'April' => 'April',
+        'May' => 'Mei',
+        'June' => 'Juni',
+        'July' => 'Juli',
+        'August' => 'Agustus',
+        'September' => 'September',
+        'October' => 'Oktober',
+        'November' => 'November',
+        'December' => 'Desember'
+    );
+
+    $tanggal_indonesia = date('d ', strtotime($tanggal)) . $bulan[date('F', strtotime($tanggal))] . date(' Y', strtotime($tanggal));
+    return $tanggal_indonesia;
+}
+
+
+// Mendapatkan jam dalam format yang diinginkan
+function getJam($tanggal)
+{
+    $jam_indonesia = date('H:i', strtotime($tanggal));
+    return $jam_indonesia;
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,22 +58,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <title>Mommy Cake</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
     <!-- Favicons -->
     <link rel="shortcut icon" href="<?= base_url() ?>assets/img/favicon.png" type="image/x-icon">
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
     <!-- Vendor CSS Files -->
     <link href="<?= base_url() ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>assets/css/main.css" rel="stylesheet">
     <style>
@@ -116,7 +158,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="row justify-content-between gy-5">
                 <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
                     <h2 data-aos="fade-up">Undangan</h2>
-                    <p data-aos="fade-up" data-aos-delay="100">[Masukkan tanggal acara]</p>
+                    <p data-aos="fade-up" data-aos-delay="100"><?= getTanggal($acara->datetime) ?></p>
 
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
@@ -154,15 +196,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                 <!-- Invitation Text -->
                 <div class="invitation-text">
-                    <h3>Grand Opening</h3>
-                    <p>Dengan hormat,</p>
-                    <p>Bla.. Blabla mengundang Anda dalam acara :</p>
-                    <p><strong>Grand Opening</strong></p>
-                    <p><strong>Mommy Tbk</strong></p>
-                    <p><strong>Hari:</strong> [Masukkan hari acara]</p>
-                    <p><strong>Tanggal:</strong> [Masukkan tanggal acara]</p>
-                    <p><strong>Jam:</strong> [Masukkan jam acara]</p>
-                    <p>Atas perhatian Anda, kami ucapkan terima kasih.</p>
+                    <?= $acara->text_start ?>
+                    <p><strong>Hari:</strong> <?= getNamaHari($acara->datetime) ?></p>
+                    <p><strong>Tanggal:</strong> <?= getTanggal($acara->datetime) ?></p>
+                    <p><strong>Jam:</strong> <?= getJam($acara->datetime) ?></p>
+                    <?= $acara->text_end ?>
                 </div>
                 <!-- End Invitation Text -->
             </div>
@@ -221,7 +259,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -311,29 +349,48 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <p>Berikan <span>Ucapan</span></p>
                 </div>
 
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form p-3 p-md-4">
-                    <div class="row">
-                        <div class="col-xl-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" method="post" role="form" class="p-3 p-md-4">
+                            <div class="row mb-3">
+                                <div class="col-lg-6 form-group">
+                                    <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" placeholder="Nama" autocomplete="off" maxlength="155" required>
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <select name="konfirmasi_kehadiran" id="konfirmasi_kehadiran" class="form-select" required>
+                                        <option value="">Konfirmasi Kehadiran</option>
+                                        <option value="1">Hadir</option>
+                                        <option value="2">Tidak Hadir</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <textarea class="form-control" name="ucapan" id="ucapan" rows="5" placeholder="Ucapan" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-dark" style="width: 100px;">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card mb-3 border-0 bg-light">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex align-items-center">
+                                            <span class="fw-bold">Fimansyah Nurindra Widyakusuma</span>
+                                            <small class="btn btn-dark btn-sm ms-auto"><i class="bi bi-check-circle-fill"></i> Tidak Hadir</small>
+                                        </div>
+                                        <small class="text-muted"><i class="bi bi-clock"></i> 1 bulan, 4 minggu lalu</small>
+                                        <div>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xl-6 form-group">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                        </div>
+                        <hr>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
-                </form><!--End Contact Form -->
 
+                </div>
             </div>
         </section>
     </main>
@@ -383,7 +440,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="tiktok"><i class="bi bi-tiktok"></i></a>
                     </div>
                 </div>
 
@@ -418,7 +475,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url() ?>assets/js/main.js"></script>
     <script>
         // Tanggal target countdown (ganti dengan tanggal yang diinginkan)
-        var countDownDate = new Date("Mar 31, 2024 00:00:00").getTime();
+        var countDownDate = new Date("<?= $acara->datetime ?>").getTime();
 
         // Memperbarui countdown setiap 1 detik
         var x = setInterval(function() {
@@ -448,8 +505,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
         }, 1000);
     </script>
-
-
 </body>
 
 </html>
