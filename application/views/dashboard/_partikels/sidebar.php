@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>app/dashboard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -10,7 +10,7 @@
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?= base_url() ?>app/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Beranda</span></a>
     </li>
@@ -30,7 +30,7 @@
                 <a class="collapse-item" href="">Akun</a>
                 <a class="collapse-item" href="<?= base_url() ?>app/acara">Acara</a>
                 <a class="collapse-item" href="<?= base_url() ?>app/sosial_media">Sosial Media</a>
-                <a class="collapse-item" href="">Landing Pages</a>
+                <a class="collapse-item" href="<?= base_url() ?>app/landing_pages">Landing Pages</a>
             </div>
         </div>
     </li>
@@ -40,7 +40,7 @@
             <span>Portofolio</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="<?= base_url() ?>app/galeri">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Galeri</span></a>
     </li>

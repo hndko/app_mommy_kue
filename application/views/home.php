@@ -55,11 +55,11 @@ function getJam($tanggal)
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Mommy Cake</title>
+    <title><?= $set_umum->title ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link rel="shortcut icon" href="<?= base_url() ?>assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url() ?>assets/img/<?= $set_umum->logo ?>" type="image/x-icon">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,7 +133,7 @@ function getJam($tanggal)
             <a href="<?= base_url() ?>" class="logo d-flex align-items-center me-auto me-lg-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="<?= base_url() ?>assets/img/logo.png" alt=""> -->
-                <h1>Mommy<span>.</span></h1>
+                <h1><?= $set_umum->judul ?><span>.</span></h1>
             </a>
 
             <nav id="navbar" class="navbar">
@@ -162,7 +162,7 @@ function getJam($tanggal)
 
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-                    <img src="<?= base_url() ?>assets/img/favicon.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="<?= base_url() ?>assets/img/<?= $set_umum->logo ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
                 </div>
             </div>
         </div>
@@ -305,7 +305,7 @@ function getJam($tanggal)
                             <i class="icon bi bi-map flex-shrink-0"></i>
                             <div>
                                 <h3>Our Address</h3>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p><?= $set_umum->alamat ?></p>
                             </div>
                         </div>
                     </div>
@@ -314,7 +314,7 @@ function getJam($tanggal)
                             <i class="icon bi bi-envelope flex-shrink-0"></i>
                             <div>
                                 <h3>Email Us</h3>
-                                <p>contact@example.com</p>
+                                <p><?= $set_umum->email ?></p>
                             </div>
                         </div>
                     </div>
@@ -323,7 +323,7 @@ function getJam($tanggal)
                             <i class="icon bi bi-telephone flex-shrink-0"></i>
                             <div>
                                 <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
+                                <p><?= $set_umum->no_telpon ?></p>
                             </div>
                         </div>
                     </div>
@@ -405,8 +405,7 @@ function getJam($tanggal)
                     <div>
                         <h4>Address</h4>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022 - US<br>
+                            <?= $set_umum->alamat ?>
                         </p>
                     </div>
 
@@ -417,8 +416,8 @@ function getJam($tanggal)
                     <div>
                         <h4>Reservations</h4>
                         <p>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            <strong>Phone:</strong> <?= $set_umum->no_telpon ?><br>
+                            <strong>Email:</strong> <?= $set_umum->email ?><br>
                         </p>
                     </div>
                 </div>
@@ -437,10 +436,10 @@ function getJam($tanggal)
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Follow Us</h4>
                     <div class="social-links d-flex">
-                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="tiktok"><i class="bi bi-tiktok"></i></a>
+                        <a href="<?= $sosmed->twitter ?>" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="<?= $sosmed->facebook ?>" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="<?= $sosmed->instagram ?>" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="<?= $sosmed->tiktok ?>" class="tiktok"><i class="bi bi-tiktok"></i></a>
                     </div>
                 </div>
 
@@ -449,7 +448,7 @@ function getJam($tanggal)
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>Mommy</span></strong> Support By <strong><span>CMS Group</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span><?= $set_umum->judul ?></span></strong> Support By <strong><span>CMS Group</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
 

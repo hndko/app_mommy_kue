@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 12:14 PM
+-- Generation Time: Mar 06, 2024 at 10:33 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -44,6 +44,24 @@ INSERT INTO `tb_acara` (`acara_id`, `text_start`, `text_end`, `datetime`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_galeri`
+--
+
+CREATE TABLE `tb_galeri` (
+  `galeri_id` int(11) NOT NULL,
+  `galeri` varchar(155) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_galeri`
+--
+
+INSERT INTO `tb_galeri` (`galeri_id`, `galeri`) VALUES
+(1, 'galeri_1709717570.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_setting_umum`
 --
 
@@ -62,7 +80,7 @@ CREATE TABLE `tb_setting_umum` (
 --
 
 INSERT INTO `tb_setting_umum` (`su_id`, `title`, `judul`, `logo`, `alamat`, `no_telpon`, `email`) VALUES
-(1, 'Mommy - Toko Bahan Kue', 'Mommy', 'favicon.png', 'A108 Adam Street, New York, NY 535022', '088809823755', 'contact@example.com');
+(1, 'Mommy | Toko Bahan Kue', 'Mommy', 'logo_1709713552.png', 'A108 Adam Street, New York, NY 535022', '088809823755', 'contact@example.com');
 
 -- --------------------------------------------------------
 
@@ -96,6 +114,12 @@ ALTER TABLE `tb_acara`
   ADD PRIMARY KEY (`acara_id`);
 
 --
+-- Indexes for table `tb_galeri`
+--
+ALTER TABLE `tb_galeri`
+  ADD PRIMARY KEY (`galeri_id`);
+
+--
 -- Indexes for table `tb_setting_umum`
 --
 ALTER TABLE `tb_setting_umum`
@@ -116,6 +140,12 @@ ALTER TABLE `tb_sosial_media`
 --
 ALTER TABLE `tb_acara`
   MODIFY `acara_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_galeri`
+--
+ALTER TABLE `tb_galeri`
+  MODIFY `galeri_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_setting_umum`

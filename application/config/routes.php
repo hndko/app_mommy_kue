@@ -13,7 +13,11 @@ $route['app/acara/update'] = 'AcaraController/update';
 $route['app/sosial_media'] = 'SosialMediaController/index';
 $route['app/sosial_media/update'] = 'SosialMediaController/update';
 
-$route['user'] = 'UserController/index';
-$route['user/create'] = 'UserController/create';
-$route['user/edit/(:any)'] = 'UserController/edit/$1';
-$route['user/delete/(:any)'] = 'UserController/delete/$1';
+$route['app/landing_pages'] = 'LandingPagesController/index';
+$route['app/landing_pages/update'] = 'LandingPagesController/update';
+
+$route['app/galeri'] = 'GaleriController/index';
+$route['app/galeri/create'] = 'GaleriController/create';
+$route['app/galeri/store'] = 'GaleriController/store';
+$route['app/galeri/edit/(:any)'] = 'GaleriController/edit/$1';
+$route['app/galeri/delete/(:any)'] = 'GaleriController/delete/$1';
