@@ -36,7 +36,8 @@
                                     <td><?= $no++ ?></td>
                                     <td><img src="<?= base_url() ?>assets/img/gallery/<?= $res->galeri ?>" class="img-fluid" style="max-width: 100px;"></td>
                                     <td>
-                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                        <a href="<?= base_url('app/galeri/edit/' . $res->galeri_id) ?>">Edit</a> |
+                                        <a href="<?= base_url('app/galeri/delete/' . $res->galeri_id) ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
