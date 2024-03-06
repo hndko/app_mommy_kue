@@ -46,6 +46,60 @@ function getJam($tanggal)
     $jam_indonesia = date('H:i', strtotime($tanggal));
     return $jam_indonesia;
 }
+
+function time_ago($timestamp)
+{
+    $time_ago = strtotime($timestamp);
+    $current_time = time();
+    $time_difference = $current_time - $time_ago;
+    $seconds = $time_difference;
+    $minutes = round($seconds / 60);
+    $hours = round($seconds / 3600);
+    $days = round($seconds / 86400);
+    $weeks = round($seconds / 604800);
+    $months = round($seconds / 2629440); // average month length
+    $years = round($seconds / 31553280);
+
+    if ($seconds <= 60) {
+        return "Baru saja";
+    } else if ($minutes <= 60) {
+        if ($minutes == 1) {
+            return "1 menit lalu";
+        } else {
+            return "$minutes menit lalu";
+        }
+    } else if ($hours <= 24) {
+        if ($hours == 1) {
+            return "1 jam lalu";
+        } else {
+            return "$hours jam lalu";
+        }
+    } else if ($days <= 7) {
+        if ($days == 1) {
+            return "Kemarin";
+        } else {
+            return "$days hari lalu";
+        }
+    } else if ($weeks <= 4) {
+        if ($weeks == 1) {
+            return "1 minggu lalu";
+        } else {
+            return "$weeks minggu lalu";
+        }
+    } else if ($months <= 12) {
+        if ($months == 1) {
+            return "1 bulan lalu";
+        } else {
+            return "$months bulan lalu";
+        }
+    } else {
+        if ($years == 1) {
+            return "1 tahun lalu";
+        } else {
+            return "$years tahun lalu";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -214,52 +268,33 @@ function getJam($tanggal)
                 </div>
                 <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <div class="row gy-4 justify-content-center">
-                                    <div class="col-lg-6">
-                                        <div class="testimonial-content">
-                                            <p>
-                                                <i class="bi bi-quote quote-icon-left"></i>
-                                                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                                                <i class="bi bi-quote quote-icon-right"></i>
-                                            </p>
-                                            <h3>Saul Goodman</h3>
-                                            <h4>Ceo &amp; Founder</h4>
-                                            <div class="stars">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        <?php foreach ($porto as $res) : ?>
+                            <div class="swiper-slide">
+                                <div class="testimonial-item">
+                                    <div class="row gy-4 justify-content-center">
+                                        <div class="col-lg-6">
+                                            <div class="testimonial-content">
+                                                <p>
+                                                    <i class="bi bi-quote quote-icon-left"></i>
+                                                    <?= $res->deskripsi ?>
+                                                    <i class="bi bi-quote quote-icon-right"></i>
+                                                </p>
+                                                <h3><?= $res->nama_lengkap ?></h3>
+                                                <h4><?= $res->jabatan ?></h4>
+                                                <div class="stars">
+                                                    <?php for ($i = 0; $i < $res->rating; $i++) : ?>
+                                                        <i class="bi bi-star-fill"></i>
+                                                    <?php endfor; ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-2 text-center">
-                                        <img src="<?= base_url() ?>assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                                        <div class="col-lg-2 text-center">
+                                            <img src="<?= base_url() ?>assets/img/testimonials/<?= $res->sampul ?>" class="img-fluid testimonial-img" alt="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <div class="row gy-4 justify-content-center">
-                                    <div class="col-lg-6">
-                                        <div class="testimonial-content">
-                                            <p>
-                                                <i class="bi bi-quote quote-icon-left"></i>
-                                                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                                                <i class="bi bi-quote quote-icon-right"></i>
-                                            </p>
-                                            <h3>John Larson</h3>
-                                            <h4>Entrepreneur</h4>
-                                            <div class="stars">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 text-center">
-                                        <img src="<?= base_url() ?>assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -274,14 +309,9 @@ function getJam($tanggal)
                 </div>
                 <div class="gallery-slider swiper">
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-1.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-2.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-3.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-4.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-5.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-6.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-7.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
-                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/gallery-8.jpg"><img src="<?= base_url() ?>assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
+                        <?php foreach ($galeri as $img) : ?>
+                            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="<?= base_url() ?>assets/img/gallery/<?= $img->galeri ?>"><img src="<?= base_url() ?>assets/img/gallery/<?= $img->galeri ?>" class="img-fluid" alt=""></a></div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -351,13 +381,13 @@ function getJam($tanggal)
 
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post" role="form" class="p-3 p-md-4">
+                        <form action="<?= base_url() ?>ucapan/contact_store" method="post" role="form" class="p-3 p-md-4">
                             <div class="row mb-3">
                                 <div class="col-lg-6 form-group">
                                     <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap" placeholder="Nama" autocomplete="off" maxlength="155" required>
                                 </div>
                                 <div class="col-lg-6 form-group">
-                                    <select name="konfirmasi_kehadiran" id="konfirmasi_kehadiran" class="form-select" required>
+                                    <select name="konfirmasi" id="konfirmasi" class="form-select" required>
                                         <option value="">Konfirmasi Kehadiran</option>
                                         <option value="1">Hadir</option>
                                         <option value="2">Tidak Hadir</option>
@@ -365,31 +395,34 @@ function getJam($tanggal)
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <textarea class="form-control" name="ucapan" id="ucapan" rows="5" placeholder="Ucapan" required></textarea>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="5" placeholder="Ucapan" required></textarea>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-dark" style="width: 100px;">Kirim</button>
                             </div>
                         </form>
                     </div>
-                    <div class="card-footer">
-                        <div class="card mb-3 border-0 bg-light">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="d-flex align-items-center">
-                                            <span class="fw-bold">Fimansyah Nurindra Widyakusuma</span>
-                                            <small class="btn btn-dark btn-sm ms-auto"><i class="bi bi-check-circle-fill"></i> Tidak Hadir</small>
+                    <?php if (!empty($ucapan)) : ?>
+                        <div class="card-footer">
+                            <?php foreach ($ucapan as $res) : ?>
+                                <div class="card mb-3 border-0 bg-light">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="fw-bold"><?= $res->nama_lengkap ?></span>
+                                                    <small class="btn btn-dark btn-sm ms-auto"><i class="bi bi-check-circle-fill"></i> <?= $res->konfirmasi === '1' ? 'Hadir' : 'Tidak Hadir' ?></small>
+                                                </div>
+                                                <small class="text-muted"><i class="bi bi-clock"></i> <?= time_ago($res->created_at) ?></small>
+                                                <div><?= $res->deskripsi ?></div>
+                                            </div>
                                         </div>
-                                        <small class="text-muted"><i class="bi bi-clock"></i> 1 bulan, 4 minggu lalu</small>
-                                        <div>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</div>
                                     </div>
                                 </div>
-                            </div>
+                                <hr>
+                            <?php endforeach; ?>
                         </div>
-                        <hr>
-                    </div>
-
+                    <?php endif; ?>
                 </div>
             </div>
         </section>

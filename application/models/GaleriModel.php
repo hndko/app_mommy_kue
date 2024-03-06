@@ -14,4 +14,16 @@ class GaleriModel extends CI_Model
     {
         $this->db->insert('tb_galeri', $data);
     }
+
+    public function ubahData($id, $data)
+    {
+        $this->db->where('galeri_id', $id);
+        $this->db->update('tb_galeri', $data);
+    }
+
+    public function deleteData($id)
+    {
+        $this->db->where('galeri_id', $id);
+        $this->db->delete('tb_galeri');
+    }
 }

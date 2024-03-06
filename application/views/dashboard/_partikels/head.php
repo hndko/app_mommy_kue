@@ -21,6 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <link href="<?= base_url() ?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
     <script src="<?= base_url() ?>assets/admin/vendor/jquery/jquery.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/84a2nk8fhbndhv1yoesdvkmcfkuajo2xx97utguyfdb7nqjc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap4.css">
 </head>
 
 <body id="page-top">

@@ -8,7 +8,7 @@
             <div class="card mb-3">
                 <div class="card-header py-3 d-flex justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Detail <?= $title ?></h6>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='<?= base_url() ?>app/galeri/create'">Tambah Data</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='<?= base_url() ?>app/portofolio/create'">Tambah Data</button>
                 </div>
                 <div class="card-body table-responsive">
                     <?php if ($this->session->flashdata('success') !== null) : ?>
@@ -25,7 +25,11 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jabatan</th>
+                                <th>Deskripsi</th>
                                 <th>Picture</th>
+                                <th>Rating</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -34,10 +38,14 @@
                             <?php foreach ($result as $res) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><img src="<?= base_url() ?>assets/img/gallery/<?= $res->galeri ?>" class="img-fluid" style="max-width: 100px;"></td>
+                                    <td><?= $res->nama_lengkap ?></td>
+                                    <td><?= $res->jabatan ?></td>
+                                    <td><?= $res->deskripsi ?></td>
+                                    <td><img src="<?= base_url() ?>assets/img/testimonials  /<?= $res->sampul ?>" class="img-fluid" style="max-width: 100px;"></td>
+                                    <td><?= $res->rating ?></td>
                                     <td>
-                                        <a href="<?= base_url('app/galeri/edit/' . $res->galeri_id) ?>">Edit</a> |
-                                        <a href="<?= base_url('app/galeri/delete/' . $res->galeri_id) ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                                        <a href="<?= base_url('app/portofolio/edit/' . $res->portofolio_id) ?>">Edit</a> |
+                                        <a href="<?= base_url('app/portofolio/delete/' . $res->portofolio_id) ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

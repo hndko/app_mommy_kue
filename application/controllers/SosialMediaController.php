@@ -7,6 +7,10 @@ class SosialMediaController extends CI_Controller
     {
         parent::__construct();
         $this->load->model('SosialMediaModel');
+
+        if ($this->session->userdata('logged') != TRUE) {
+            redirect('login');
+        }
     }
 
     public function index()

@@ -7,6 +7,10 @@ class AcaraController extends CI_Controller
     {
         parent::__construct();
         $this->load->model('AcaraModel');
+
+        if ($this->session->userdata('logged') != TRUE) {
+            redirect('login');
+        }
     }
 
     public function index()
