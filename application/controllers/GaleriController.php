@@ -13,7 +13,7 @@ class GaleriController extends CI_Controller
     {
         $data = [
             'title' => 'Galeri',
-            'res' => $this->GaleriModel->getData()
+            'result' => $this->GaleriModel->getData()
         ];
 
         $this->load->view('dashboard/_partikels/head');

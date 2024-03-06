@@ -30,7 +30,16 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <?php $no = 1; ?>
+                            <?php foreach ($result as $res) : ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><img src="<?= base_url() ?>assets/img/gallery/<?= $res->galeri ?>" class="img-fluid" style="max-width: 100px;"></td>
+                                    <td>
+                                        <a href="">Edit</a> | <a href="">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
